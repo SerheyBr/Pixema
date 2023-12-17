@@ -3,7 +3,7 @@ import SortIcon from "@mui/icons-material/Sort";
 
 const SearchInput = () => {
   return (
-    <label className="relative">
+    <label className="relative w-full">
       <input
         type="text"
         placeholder="Search"

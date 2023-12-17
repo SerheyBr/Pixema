@@ -13,6 +13,12 @@ input{
 	background-color: inherit;	
 }
 
+.container {
+	max-width: 1510px;
+	padding: 0 20px;
+	margin: 0 auto;
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
