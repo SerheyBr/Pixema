@@ -16,8 +16,12 @@ const CustomInput: FC<ICustomInputProps> = ({
 }) => {
   if (type === "text") {
     return (
-      <div>
-        {title ? <p className="mb-6 ">{title}</p> : ""}
+      <div className="w-full">
+        {title ? (
+          <p className="mb-6 text-base font-semibold text-white">{title}</p>
+        ) : (
+          ""
+        )}
         <label className=" px-5 py-4 rounded-xl bg-slate-600 text-white">
           <input
             type="text"

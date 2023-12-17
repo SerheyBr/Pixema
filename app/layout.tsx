@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
+import WindowFilters from "@/components/WindowFilters";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             </div>
             {children}
           </div>
+          <WindowFilters />
         </main>
       </body>
     </html>

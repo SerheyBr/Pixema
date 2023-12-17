@@ -1,5 +1,6 @@
 import React from "react";
 import SortIcon from "@mui/icons-material/Sort";
+import WindowFilters from "./WindowFilters";
 
 const SearchInput = () => {
   return (

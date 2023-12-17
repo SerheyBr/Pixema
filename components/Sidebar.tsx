@@ -26,7 +26,7 @@ const Sidebar = () => {
             </li>
             <li className="w-min mb-10">
               <Link
-                href={"/"}
+                href={"/trends"}
                 className=" flex hover:text-gray-200 duration-150"
               >
                 <WhatshotIcon className=" mr-6" />
@@ -35,7 +35,7 @@ const Sidebar = () => {
             </li>
             <li className="w-min mb-10">
               <Link
-                href={"/"}
+                href={"/favorites"}
                 className=" flex hover:text-gray-200 duration-150"
               >
                 <TurnedInIcon className=" mr-6" />
@@ -44,7 +44,7 @@ const Sidebar = () => {
             </li>
             <li className="w-min mb-10">
               <Link
-                href={"/"}
+                href={"/setting"}
                 className=" flex hover:text-gray-200 duration-150"
               >
                 <SettingsIcon className=" mr-6" />
