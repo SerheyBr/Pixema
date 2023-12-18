@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
 import WindowFilters from "@/components/WindowFilters";
+import { useParams } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 

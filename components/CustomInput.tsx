@@ -22,7 +22,7 @@ const CustomInput: FC<ICustomInputProps> = ({
         ) : (
           ""
         )}
-        <label className=" px-5 py-4 rounded-xl bg-slate-600 text-white">
+        <label className=" w-full px-5 py-4 rounded-xl bg-slate-600 text-white">
           <input
             type="text"
             placeholder={placeholder}
