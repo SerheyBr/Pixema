@@ -13,7 +13,7 @@ input{
 	background-color: inherit;	
 }
 
-.container {
+.wrapper {
 	max-width: 1510px;
 	padding: 0 20px;
 	margin: 0 auto;

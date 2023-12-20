@@ -20,7 +20,7 @@ const Favorites = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="wrapper">
       {films ? (
         <div className=" -mx-5 flex flex-wrap">
           {films.map((film: any) => (

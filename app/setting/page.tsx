@@ -5,7 +5,7 @@ import Switch from "@mui/material/Switch";
 
 const Setting = () => {
   return (
-    <div className="container">
+    <div className="wrapper">
       <div className=" mb-4">
         <Title title={"Profile"} />
       </div>

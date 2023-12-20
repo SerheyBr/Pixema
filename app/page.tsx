@@ -9,6 +9,7 @@ import Burger from "@/components/Burger";
 import CustomInput from "@/components/CustomInput";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 // const getFilms = async () => {
 //   const response = await fetch(
@@ -38,18 +39,20 @@ export default function Home() {
   console.log(films);
   console.log(isOpenBurger);
   return (
-    <div className="container">
+    <div className="wrapper">
       <div className="relative overflow-hidden">
         <div className=" -mx-5 flex flex-wrap">
           {films
             ? films.map((film: any) => (
                 <div className=" w-1/5 px-5">
-                  <Card
-                    img={film.Poster}
-                    title={film.Title}
-                    rating={"0.0"}
-                    gengres={"none"}
-                  />
+                  <Link href={`/movies/${film.imdbID}`}>
+                    <Card
+                      img={film.Poster}
+                      title={film.Title}
+                      rating={"0.0"}
+                      gengres={"none"}
+                    />
+                  </Link>
                 </div>
               ))
             : ""}

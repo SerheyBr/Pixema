@@ -18,7 +18,7 @@ const Trends = () => {
       .then((data) => setTrends(data.Search));
   }, []);
   return (
-    <div className="container">
+    <div className="wrapper">
       {trends ? (
         <div className=" -mx-5 flex flex-wrap">
           {trends.map((film: any) => (

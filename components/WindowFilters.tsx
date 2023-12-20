@@ -5,7 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const WindowFilters = () => {
   const [sortTo, setSortTo] = useState("Rating");
-  const [closeFilter, setCloseFilter] = useState(false);
+  const [closeFilter, setCloseFilter] = useState(true);
   return (
     <div
       className={
