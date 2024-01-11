@@ -10,26 +10,21 @@ const getFilms = async () => {
 };
 
 const Trends = () => {
-  const [trends, setTrends] = useState(null);
+  const [trends, setTrends] = useState<null | any>(null);
 
   useEffect(() => {
     getFilms()
       .then((res) => res.json())
       .then((data) => setTrends(data.Search));
   }, []);
+
   return (
     <div className="wrapper">
       {trends ? (
         <div className=" -mx-5 flex flex-wrap">
           {trends.map((film: any) => (
-            <div className="w-1/5 px-5">
-              <Card
-                img={film.Poster}
-                title={film.Title}
-                rating={"0.0"}
-                gengres={"none"}
-                trends={true}
-              />
+            <div className="w-1/5 px-5" key={film.imdbID}>
+              <Card film={film} trends={true} />
             </div>
           ))}
         </div>

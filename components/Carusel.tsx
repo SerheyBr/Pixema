@@ -21,7 +21,6 @@ const Carusel = () => {
       .then((res) => res.json())
       .then((data) => setFilm(data.Search));
   }, []);
-  console.log(films);
 
   const settings = {
     dots: false,
@@ -38,13 +37,8 @@ const Carusel = () => {
           <div className=" max-w-4xl overflow-hidden">
             <Slider {...settings}>
               {films.map((movie) => (
-                <div className=" px-2">
-                  <Card
-                    img={movie.Poster}
-                    title={movie.Title}
-                    rating={movie.imdbRating}
-                    gengres={movie.Genre}
-                  />
+                <div className=" px-2" key={movie.imdbID}>
+                  <Card film={movie} trends={false} />
                 </div>
               ))}
             </Slider>

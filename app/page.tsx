@@ -29,6 +29,7 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [films, setFilm] = useState([]);
   const [isOpenBurger, setIsOpenBurger] = useState(false);
+  console.log("asdas");
 
   useEffect(() => {
     getFilms(page)
@@ -36,23 +37,16 @@ export default function Home() {
       .then((data) => setFilm(data.Search));
   }, [page]);
 
-  console.log(films);
-  console.log(isOpenBurger);
   return (
     <div className="wrapper">
       <div className="relative overflow-hidden">
         <div className=" -mx-5 flex flex-wrap">
           {films
             ? films.map((film: any) => (
-                <div className=" w-1/5 px-5">
-                  <Link href={`/movies/${film.imdbID}`}>
-                    <Card
-                      img={film.Poster}
-                      title={film.Title}
-                      rating={"0.0"}
-                      gengres={"none"}
-                    />
-                  </Link>
+                <div className=" w-1/5 px-5" key={film.imdbID}>
+                  <div>
+                    <Card film={film} trends={false} />
+                  </div>
                 </div>
               ))
             : ""}

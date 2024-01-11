@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
 import WindowFilters from "@/components/WindowFilters";
 import { useParams } from "next/navigation";
+import ReduxProvider from "@/redux/ReduxProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,20 +21,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className=" bg-slate-800">
-        <main className="flex relative">
-          <div className=" mr-20">
-            <Sidebar />
-          </div>
-          <div className="w-full">
-            <div className=" mb-10">
-              <Footer />
+      <ReduxProvider>
+        <body className=" bg-slate-800">
+          <main className="flex relative">
+            <div className=" mr-20">
+              <Sidebar />
             </div>
-            {children}
-          </div>
-          <WindowFilters />
-        </main>
-      </body>
+            <div className="w-full">
+              <div className=" mb-10">
+                <Footer />
+              </div>
+              {children}
+            </div>
+            <WindowFilters />
+          </main>
+        </body>
+      </ReduxProvider>
     </html>
   );
 }

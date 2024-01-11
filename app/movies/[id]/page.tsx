@@ -6,6 +6,9 @@ import { IMovie } from "@/types/types";
 import TurnedInIcon from "@mui/icons-material/TurnedIn";
 import ShareIcon from "@mui/icons-material/Share";
 import Carusel from "@/components/Carusel";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/redux/store";
+import { addMovie } from "@/redux/favoritesSlice";
 
 const getFilm = async (id: string) => {
   const response = await fetch(
@@ -15,17 +18,22 @@ const getFilm = async (id: string) => {
 };
 
 const Muvie = () => {
+  const favorites = useSelector(
+    (state: RootState) => state.favorites.favorites
+  );
+  const dispatch = useDispatch();
   const [movie, setMovie] = useState<null | IMovie>(null);
   const { id } = useParams<{ id: string }>();
+
+  console.log(id);
+  console.log(movie);
 
   useEffect(() => {
     getFilm(id)
       .then((res) => res.json())
       .then((data) => setMovie(data));
-    console.log("id", id);
   }, []);
 
-  console.log(movie);
   return (
     <div className="wrapper">
       {movie ? (
@@ -35,7 +43,10 @@ const Muvie = () => {
               <img src={movie.Poster} alt="poster" />
             </div>
             <div className=" flex text-white">
-              <button className="w-2/4 bg-gray-600 py-4 text-center hover:bg-gray-700 duration-150 border-black border-r rounded-l-lg ">
+              <button
+                onClick={() => dispatch(addMovie(movie))}
+                className="w-2/4 bg-gray-600 py-4 text-center hover:bg-gray-700 duration-150 border-black border-r rounded-l-lg "
+              >
                 <TurnedInIcon />
               </button>
               <button className="w-2/4 bg-gray-600 py-4 text-center hover:bg-gray-700 duration-150 border-black border-l rounded-r-lg">

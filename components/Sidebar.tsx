@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const pathName = usePathname();
-  console.log(pathName);
+
   return (
     <div className=" mt-12 ml-16 mb-16 h-full bg-slate-800 flex flex-col justify-between text-gray-400">
       <div>

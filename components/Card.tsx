@@ -1,36 +1,38 @@
 import React, { FC } from "react";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
+import Link from "next/link";
+import { IMovie } from "@/types/types";
 
-interface ICardProps {
-  img: string;
-  title: string;
-  rating: string | number;
-  gengres: any;
-  trends?: boolean;
-}
+// interface ICardProps {
+//   img: string;
+//   title: string;
+//   rating: string | number;
+//   gengres: any;
+//   trends?: boolean;
+// }
 
-const Card: FC<ICardProps> = ({ img, title, rating, gengres, trends }) => {
+const Card = ({ film, trends }: { film: IMovie; trends: boolean }) => {
   return (
-    <div className=" w-full ">
+    <Link className=" w-full " href={`/movies/${film.imdbID}`}>
       <div className=" mb-6 relative h-96 rounded-xl bg-zinc-500">
         <img
           className="rounded-xl object-cover w-full h-full "
-          src={img}
+          src={film.Poster}
           alt="img"
         />
         {trends ? (
           <div className=" absolute top-3 left-3 flex items-center w-min p-2 bg-blue-900 rounded-md text-white text-lg">
-            <WhatshotIcon /> {rating}
+            <WhatshotIcon /> {"9"}
           </div>
         ) : (
           <div className=" absolute top-3 left-3 w-min p-4 bg-green-600 rounded-md text-white">
-            {rating}
+            {"9"}
           </div>
         )}
       </div>
-      <p className=" mb-1 text-white font-bold">{title}</p>
-      <p className=" text-gray-400">{gengres}</p>
-    </div>
+      <p className=" mb-1 text-white font-bold">{film.Title}</p>
+      <p className=" text-gray-400">{film.Genre}</p>
+    </Link>
   );
 };
 

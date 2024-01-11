@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Card from "@/components/Card";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 const getFilms = async () => {
   const response = await fetch(
@@ -11,7 +13,10 @@ const getFilms = async () => {
 };
 
 const Favorites = () => {
-  const [films, setFilms] = useState(null);
+  const favorites = useSelector(
+    (state: RootState) => state.favorites.favorites
+  );
+  const [films, setFilms] = useState<null | any>(null);
 
   useEffect(() => {
     getFilms()
@@ -21,16 +26,11 @@ const Favorites = () => {
 
   return (
     <div className="wrapper">
-      {films ? (
+      {favorites.length > 0 ? (
         <div className=" -mx-5 flex flex-wrap">
-          {films.map((film: any) => (
-            <div className="w-1/5 px-5">
-              <Card
-                img={film.Poster}
-                title={film.Title}
-                rating={"0.0"}
-                gengres={"none"}
-              />
+          {favorites.map((film: any) => (
+            <div className="w-1/5 px-5" key={film.imdbID}>
+              <Card film={film} trends={false} />
             </div>
           ))}
         </div>
