@@ -7,33 +7,47 @@ import TurnedInIcon from "@mui/icons-material/TurnedIn";
 import ShareIcon from "@mui/icons-material/Share";
 import Carusel from "@/components/Carusel";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/redux/store";
-import { addMovie } from "@/redux/favoritesSlice";
-
-const getFilm = async (id: string) => {
-  const response = await fetch(
-    `https://www.omdbapi.com/?i=${id}&apikey=9baeb1f7&`
-  );
-  return response;
-};
+import { AppDispatch, RootState } from "@/redux/store";
+import { addFilm, removeFilm } from "@/redux/favoritesSlice";
+import { fetchSelectedFilms } from "@/redux/selectedFilmSlice";
 
 const Muvie = () => {
-  const favorites = useSelector(
-    (state: RootState) => state.favorites.favorites
+  const dispatch = useDispatch<AppDispatch>();
+  const movie: IMovie | null = useSelector<RootState>(
+    (state) => state.selectedFilm.film
   );
-  const dispatch = useDispatch();
-  const [movie, setMovie] = useState<null | IMovie>(null);
   const { id } = useParams<{ id: string }>();
-
-  console.log(id);
-  console.log(movie);
+  const [isFavorites, setIsFavorites] = useState(false);
 
   useEffect(() => {
-    getFilm(id)
-      .then((res) => res.json())
-      .then((data) => setMovie(data));
+    dispatch(fetchSelectedFilms(id));
   }, []);
 
+  const favorites: any = useSelector<RootState>(
+    (state) => state.favorites.favorites
+  );
+
+  const checkPresence = (arr: any[], id: string | number) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].imdbID === id) {
+        setIsFavorites(false);
+        dispatch(removeFilm(id));
+        return;
+      }
+    }
+    setIsFavorites(true);
+    dispatch(addFilm(movie));
+  };
+
+  useEffect(() => {
+    for (let i = 0; i < favorites.length; i++) {
+      if (favorites[i].imdbID === id) {
+        setIsFavorites(true);
+      }
+    }
+  }, []);
+
+  console.log(isFavorites);
   return (
     <div className="wrapper">
       {movie ? (
@@ -43,12 +57,21 @@ const Muvie = () => {
               <img src={movie.Poster} alt="poster" />
             </div>
             <div className=" flex text-white">
-              <button
-                onClick={() => dispatch(addMovie(movie))}
-                className="w-2/4 bg-gray-600 py-4 text-center hover:bg-gray-700 duration-150 border-black border-r rounded-l-lg "
-              >
-                <TurnedInIcon />
-              </button>
+              {isFavorites ? (
+                <button
+                  onClick={() => checkPresence(favorites, movie.imdbID)}
+                  className="w-2/4  py-4 text-center hover:bg-gray-700 duration-150 border-black border-r rounded-l-lg bg-orange-500"
+                >
+                  <TurnedInIcon />
+                </button>
+              ) : (
+                <button
+                  onClick={() => checkPresence(favorites, movie.imdbID)}
+                  className="w-2/4 bg-gray-600 py-4 text-center hover:bg-gray-700 duration-150 border-black border-r rounded-l-lg "
+                >
+                  <TurnedInIcon />
+                </button>
+              )}
               <button className="w-2/4 bg-gray-600 py-4 text-center hover:bg-gray-700 duration-150 border-black border-l rounded-r-lg">
                 <ShareIcon />
               </button>

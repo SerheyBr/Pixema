@@ -11,7 +11,7 @@ const WindowFilters = () => {
       className={
         closeFilter
           ? " hidden"
-          : "fixed top-0 right-0 px-10 py-12 h-screen w-96 bg-slate-700 flex flex-col justify-between"
+          : "fixed top-0 right-0 px-10 py-12 h-screen w-96 bg-slate-700 flex flex-col justify-between z-50"
       }
     >
       <button

@@ -1,24 +1,28 @@
-import { IMovie } from "@/types/types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
-interface IFavoritesSlice {
-  favorites: [];
+interface IInitialState {
+  favorites: any[];
 }
 
-const initialState: IFavoritesSlice = {
+const initialState: IInitialState = {
   favorites: [],
 };
 
 export const favoritesSlice = createSlice({
-  name: "counter",
+  name: "favorites",
   initialState,
   reducers: {
-    addMovie: (state, action: PayloadAction<IMovie>) => {
-      state.favorites.push(action.payload);
+    addFilm: (state, action) => {
+      state.favorites = [...state.favorites, action.payload];
+    },
+    removeFilm: (state, action) => {
+      state.favorites = state.favorites.filter(
+        (el) => !(el.imdbID === action.payload)
+      );
     },
   },
 });
 
-export const { addMovie } = favoritesSlice.actions;
-
+export const { addFilm, removeFilm } = favoritesSlice.actions;
 export default favoritesSlice.reducer;

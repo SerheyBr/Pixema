@@ -1,11 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./counterSlice";
+import filmsSlice from "./filmsSlice";
+import seachResultSclice from "./serchResultSlice";
+import trendsSlice from "./trendsSlice";
 import favoritesSlice from "./favoritesSlice";
+import selectedFilmSlice from "./selectedFilmSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    films: filmsSlice,
+    searchResult: seachResultSclice,
+    trends: trendsSlice,
     favorites: favoritesSlice,
+    selectedFilm: selectedFilmSlice,
   },
 });
 

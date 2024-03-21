@@ -19,6 +19,16 @@ input{
 	margin: 0 auto;
 }
 
+.MuiPagination-ul li button{
+color: white;
+}
+.css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover{
+	background-color: #ffffff5e;
+}
+.css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+	background-color: #ffffff5e;
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

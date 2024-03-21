@@ -5,24 +5,24 @@ import Card from "@/components/Card";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
-const getFilms = async () => {
-  const response = await fetch(
-    `https://www.omdbapi.com/?i=tt3896198&apikey=9baeb1f7&s=Favorites`
-  );
-  return response;
-};
+// const getFilms = async () => {
+//   const response = await fetch(
+//     `https://www.omdbapi.com/?i=tt3896198&apikey=9baeb1f7&s=Favorites`
+//   );
+//   return response;
+// };
 
 const Favorites = () => {
-  const favorites = useSelector(
-    (state: RootState) => state.favorites.favorites
+  const favorites: any = useSelector<RootState>(
+    (state) => state.favorites.favorites
   );
-  const [films, setFilms] = useState<null | any>(null);
+  //   const [films, setFilms] = useState<null | any>(null);
 
-  useEffect(() => {
-    getFilms()
-      .then((res) => res.json())
-      .then((data) => setFilms(data.Search));
-  }, []);
+  //   useEffect(() => {
+  //     getFilms()
+  //       .then((res) => res.json())
+  //       .then((data) => setFilms(data.Search));
+  //   }, []);
 
   return (
     <div className="wrapper">

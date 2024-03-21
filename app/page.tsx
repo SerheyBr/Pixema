@@ -1,48 +1,61 @@
 "use client";
-import Image from "next/image";
-import SortingBtn from "@/components/SortingBtn";
-import UserLogo from "@/components/UserLogo";
-import SearchInput from "@/components/SearchInput";
 import Card from "@/components/Card";
 import { useEffect, useState } from "react";
-import Burger from "@/components/Burger";
-import CustomInput from "@/components/CustomInput";
-import Sidebar from "@/components/Sidebar";
-import Footer from "@/components/Footer";
-import Link from "next/link";
-
-// const getFilms = async () => {
-//   const response = await fetch(
-//     "https://www.omdbapi.com/?i=tt3896198&apikey=9baeb1f7"
-//   );
-//   return response;
-// };
-
-const getFilms = async (page: number) => {
-  const response = await fetch(
-    `https://www.omdbapi.com/?i=tt3896198&apikey=9baeb1f7&s=Gary&page=${page}`
-  );
-  return response;
-};
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState, store } from "@/redux/store";
+import { fetchFilms, setPage } from "@/redux/filmsSlice";
+import { IMovie } from "@/types/types";
+import { Pagination } from "@mui/material";
+import { setPageSearchValue } from "@/redux/serchResultSlice";
+import { fetchTrends } from "@/redux/trendsSlice";
 
 export default function Home() {
-  const [page, setPage] = useState(1);
-  const [films, setFilm] = useState([]);
-  const [isOpenBurger, setIsOpenBurger] = useState(false);
-  console.log("asdas");
+  const dispath = useDispatch<AppDispatch>();
+  const films: any = useSelector<RootState>((state) => state.films.films);
+  const tottalResultMainFilms: any = useSelector<RootState>(
+    (state) => state.films.totalResult
+  );
+  const tottalResultSearch: any = useSelector<RootState>(
+    (state) => state.searchResult.totalResult
+  );
+  const searchResultList: any = useSelector<RootState>(
+    (state) => state.searchResult.searchFilmsList
+  );
+  const isShowFullSearchList = useSelector<RootState>(
+    (state) => state.searchResult.isShowFullListResultSearch
+  );
+  const searchPage: any = useSelector<RootState>(
+    (state) => state.searchResult.parametrsSearch.page
+  );
+  const currentPage: any = useSelector<RootState>(
+    (state) => state.films.currentPage.page
+  );
+
+  let allPages = tottalResultMainFilms
+    ? Math.ceil(tottalResultMainFilms / 10)
+    : 0;
+  let allPagesResultSearch = tottalResultSearch
+    ? Math.ceil(tottalResultSearch / 10)
+    : 0;
 
   useEffect(() => {
-    getFilms(page)
-      .then((res) => res.json())
-      .then((data) => setFilm(data.Search));
-  }, [page]);
+    dispath(fetchFilms(currentPage));
+  }, [currentPage]);
 
   return (
     <div className="wrapper">
       <div className="relative overflow-hidden">
         <div className=" -mx-5 flex flex-wrap">
-          {films
-            ? films.map((film: any) => (
+          {isShowFullSearchList
+            ? searchResultList?.map((film: IMovie) => (
+                <div className=" w-1/5 px-5" key={film.imdbID}>
+                  <div>
+                    <Card film={film} trends={false} />
+                  </div>
+                </div>
+              ))
+            : films?.length
+            ? films.map((film: IMovie) => (
                 <div className=" w-1/5 px-5" key={film.imdbID}>
                   <div>
                     <Card film={film} trends={false} />
@@ -51,12 +64,31 @@ export default function Home() {
               ))
             : ""}
         </div>
-        <button
+        {/* <button
           className="block mt-5 mx-auto px-6 py-2 bg-slate-600 rounded-full text-base text-white hover:bg-slate-400 duration-150"
           onClick={() => setPage((prev) => prev + 1)}
         >
           show more
-        </button>
+        </button> */}
+        {isShowFullSearchList ? (
+          <div>
+            <Pagination
+              page={searchPage ? searchPage : 1}
+              count={allPagesResultSearch}
+              onChange={(event, page) => dispath(setPageSearchValue(page))}
+            ></Pagination>
+          </div>
+        ) : films.length ? (
+          <div>
+            <Pagination
+              count={allPages}
+              page={currentPage ? currentPage : 1}
+              onChange={(event, page) => dispath(setPage(page))}
+            ></Pagination>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
