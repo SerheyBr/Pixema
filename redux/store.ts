@@ -4,6 +4,7 @@ import seachResultSclice from "./serchResultSlice";
 import trendsSlice from "./trendsSlice";
 import favoritesSlice from "./favoritesSlice";
 import selectedFilmSlice from "./selectedFilmSlice";
+import toggleModalSearchResultsSlice from "./toggleModalSearchResults";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     trends: trendsSlice,
     favorites: favoritesSlice,
     selectedFilm: selectedFilmSlice,
+    toggleModalSearch: toggleModalSearchResultsSlice,
   },
 });
 

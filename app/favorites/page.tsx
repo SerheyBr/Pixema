@@ -4,33 +4,23 @@ import Image from "next/image";
 import Card from "@/components/Card";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-
-// const getFilms = async () => {
-//   const response = await fetch(
-//     `https://www.omdbapi.com/?i=tt3896198&apikey=9baeb1f7&s=Favorites`
-//   );
-//   return response;
-// };
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 const Favorites = () => {
   const favorites: any = useSelector<RootState>(
     (state) => state.favorites.favorites
   );
-  //   const [films, setFilms] = useState<null | any>(null);
-
-  //   useEffect(() => {
-  //     getFilms()
-  //       .then((res) => res.json())
-  //       .then((data) => setFilms(data.Search));
-  //   }, []);
 
   return (
     <div className="wrapper">
       {favorites.length > 0 ? (
-        <div className=" -mx-5 flex flex-wrap">
+        <div className="  -mx-1 flex flex-wrap sm:-mx-2 md:-mx-3 lg:-mx-4">
           {favorites.map((film: any) => (
-            <div className="w-1/5 px-5" key={film.imdbID}>
-              <Card film={film} trends={false} />
+            <div
+              className=" w-full px-1 sm:w-1/4 sm:px-2 md:w-1/3 md:px-3 lg:w-1/5 lg:px-4"
+              key={film.imdbID}
+            >
+              <Card film={film} />
             </div>
           ))}
         </div>

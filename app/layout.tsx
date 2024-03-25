@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
-import WindowFilters from "@/components/WindowFilters";
+
 import { useParams } from "next/navigation";
 import ReduxProvider from "@/redux/ReduxProvider";
 
@@ -24,7 +24,7 @@ export default function RootLayout({
       <ReduxProvider>
         <body className=" bg-slate-800">
           <main className="flex relative">
-            <div className=" mr-20">
+            <div className=" hidden md:block mr-20">
               <Sidebar />
             </div>
             <div className="w-full">
@@ -33,7 +33,6 @@ export default function RootLayout({
               </div>
               {children}
             </div>
-            <WindowFilters />
           </main>
         </body>
       </ReduxProvider>

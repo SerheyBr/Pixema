@@ -28,17 +28,31 @@ const Carusel = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   return (
     <div className=" overflow-hidden">
       {films ? (
         <div>
-          <div className=" max-w-4xl overflow-hidden">
+          <div className=" max-w-3xl overflow-hidden">
             <Slider {...settings}>
               {films.map((movie) => (
                 <div className=" px-2" key={movie.imdbID}>
-                  <Card film={movie} trends={false} />
+                  <Card film={movie} />
                 </div>
               ))}
             </Slider>

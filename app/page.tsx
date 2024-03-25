@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState, store } from "@/redux/store";
 import { fetchFilms, setPage } from "@/redux/filmsSlice";
 import { IMovie } from "@/types/types";
-import { Pagination } from "@mui/material";
+import { CircularProgress, Pagination } from "@mui/material";
 import { setPageSearchValue } from "@/redux/serchResultSlice";
 import { fetchTrends } from "@/redux/trendsSlice";
 
@@ -30,6 +30,9 @@ export default function Home() {
   const currentPage: any = useSelector<RootState>(
     (state) => state.films.currentPage.page
   );
+  const favoriteFilms: any = useSelector<RootState>(
+    (state) => state.favorites.favorites
+  );
 
   let allPages = tottalResultMainFilms
     ? Math.ceil(tottalResultMainFilms / 10)
@@ -42,23 +45,33 @@ export default function Home() {
     dispath(fetchFilms(currentPage));
   }, [currentPage]);
 
+  useEffect(() => {
+    console.log("123");
+  }, [favoriteFilms.length]);
+  //   console.log(favoriteFilms);
   return (
     <div className="wrapper">
       <div className="relative overflow-hidden">
-        <div className=" -mx-5 flex flex-wrap">
+        <div className=" -mx-1 flex flex-wrap sm:-mx-2 md:-mx-3 lg:-mx-4">
           {isShowFullSearchList
             ? searchResultList?.map((film: IMovie) => (
-                <div className=" w-1/5 px-5" key={film.imdbID}>
+                <div
+                  className=" w-full px-1 sm:w-1/4 sm:px-2 md:w-1/3 md:px-3 lg:w-1/5 lg:px-4"
+                  key={film.imdbID}
+                >
                   <div>
-                    <Card film={film} trends={false} />
+                    <Card film={film} />
                   </div>
                 </div>
               ))
             : films?.length
             ? films.map((film: IMovie) => (
-                <div className=" w-1/5 px-5" key={film.imdbID}>
+                <div
+                  className=" w-full px-1 sm:w-1/4 sm:px-2 md:w-1/3 md:px-3 lg:w-1/5 lg:px-4"
+                  key={film.imdbID}
+                >
                   <div>
-                    <Card film={film} trends={false} />
+                    <Card film={film} />
                   </div>
                 </div>
               ))
@@ -71,7 +84,7 @@ export default function Home() {
           show more
         </button> */}
         {isShowFullSearchList ? (
-          <div>
+          <div className="mt-7 w-full flex justify-center">
             <Pagination
               page={searchPage ? searchPage : 1}
               count={allPagesResultSearch}
@@ -79,7 +92,7 @@ export default function Home() {
             ></Pagination>
           </div>
         ) : films.length ? (
-          <div>
+          <div className=" mt-7 w-full flex justify-center">
             <Pagination
               count={allPages}
               page={currentPage ? currentPage : 1}
@@ -87,7 +100,11 @@ export default function Home() {
             ></Pagination>
           </div>
         ) : (
-          ""
+          <div className="relative w-full h-screen">
+            <div className="absolute top-1/4 left-2/4 ">
+              <CircularProgress />
+            </div>
+          </div>
         )}
       </div>
     </div>
