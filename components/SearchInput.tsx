@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect } from "react";
-import SortIcon from "@mui/icons-material/Sort";
-import { useState } from "react";
 import Link from "next/link";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +12,6 @@ import {
   setPageSearchValue,
 } from "@/redux/serchResultSlice";
 import { setPage } from "@/redux/filmsSlice";
-import { IMovie } from "@/types/types";
 import {
   openModalSearchResults,
   closeModalSearchResults,

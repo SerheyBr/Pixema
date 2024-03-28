@@ -4,7 +4,6 @@ import Image from "next/image";
 import Card from "@/components/Card";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 const Favorites = () => {
   const favorites: any = useSelector<RootState>(

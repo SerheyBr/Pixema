@@ -61,7 +61,6 @@ const Sidebar = () => {
           </ul>
         </nav>
       </div>
-
       <p className=" whitespace-nowrap fixed bottom-0">© All Rights Reserved</p>
     </div>
   );

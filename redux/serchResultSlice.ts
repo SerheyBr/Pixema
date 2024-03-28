@@ -1,7 +1,5 @@
 import { IMovie } from "@/types/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-import { RootState } from "./store";
 
 export const fetchSearchFilms = createAsyncThunk(
   "searchResult/fetchSearchFilms",

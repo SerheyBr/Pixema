@@ -1,10 +1,7 @@
 import { IMovie } from "@/types/types";
 import Link from "next/link";
 import React, { FC } from "react";
-import {
-  openModalSearchResults,
-  closeModalSearchResults,
-} from "@/redux/toggleModalSearchResults";
+import { closeModalSearchResults } from "@/redux/toggleModalSearchResults";
 import { setValueSearch } from "@/redux/serchResultSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -18,6 +15,13 @@ const ModalSearchResults: FC<IModalSearchResults> = ({ searchList }) => {
   const isOpenSerachModal: any = useSelector<RootState>(
     (state) => state.toggleModalSearch.isOpen
   );
+
+  const btnOnClick = (event: any) => {
+    event.stopPropagation();
+    dispatch(closeModalSearchResults());
+    dispatch(setValueSearch(""));
+  };
+
   return (
     <div className="relative left-0 top-28 w-4/5 ml-6 sm:w-3/6 sm:left-1/4 md:left-2/4 md:m-0 md:w-2/5 pr-5 bg-white">
       <ul>
@@ -31,9 +35,7 @@ const ModalSearchResults: FC<IModalSearchResults> = ({ searchList }) => {
               className="flex items-center w-full"
               href={`/movies/${el.imdbID}`}
               onClick={(event) => {
-                event.stopPropagation();
-                dispatch(closeModalSearchResults());
-                dispatch(setValueSearch(""));
+                btnOnClick(event);
               }}
             >
               <div className=" mr-3 w-10 h-10">

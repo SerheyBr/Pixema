@@ -1,13 +1,12 @@
 "use client";
 import Card from "@/components/Card";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState, store } from "@/redux/store";
 import { fetchFilms, setPage } from "@/redux/filmsSlice";
 import { IMovie } from "@/types/types";
 import { CircularProgress, Pagination } from "@mui/material";
 import { setPageSearchValue } from "@/redux/serchResultSlice";
-import { fetchTrends } from "@/redux/trendsSlice";
 
 export default function Home() {
   const dispath = useDispatch<AppDispatch>();
@@ -30,9 +29,6 @@ export default function Home() {
   const currentPage: any = useSelector<RootState>(
     (state) => state.films.currentPage.page
   );
-  const favoriteFilms: any = useSelector<RootState>(
-    (state) => state.favorites.favorites
-  );
 
   let allPages = tottalResultMainFilms
     ? Math.ceil(tottalResultMainFilms / 10)
@@ -45,10 +41,6 @@ export default function Home() {
     dispath(fetchFilms(currentPage));
   }, [currentPage]);
 
-  useEffect(() => {
-    console.log("123");
-  }, [favoriteFilms.length]);
-  //   console.log(favoriteFilms);
   return (
     <div className="wrapper">
       <div className="relative overflow-hidden">
@@ -77,12 +69,6 @@ export default function Home() {
               ))
             : ""}
         </div>
-        {/* <button
-          className="block mt-5 mx-auto px-6 py-2 bg-slate-600 rounded-full text-base text-white hover:bg-slate-400 duration-150"
-          onClick={() => setPage((prev) => prev + 1)}
-        >
-          show more
-        </button> */}
         {isShowFullSearchList ? (
           <div className="mt-7 w-full flex justify-center">
             <Pagination

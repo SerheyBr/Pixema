@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Image from "next/image";
+
 import { IMovie } from "@/types/types";
 import TurnedInIcon from "@mui/icons-material/TurnedIn";
 import Carusel from "@/components/Carusel";
@@ -13,9 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const Muvie = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const movie: IMovie | null = useSelector<RootState>(
-    (state) => state.selectedFilm.film
-  );
+  const movie: any = useSelector<RootState>((state) => state.selectedFilm.film);
   const { id } = useParams<{ id: string }>();
   const [isFavorites, setIsFavorites] = useState(false);
 
@@ -55,21 +53,16 @@ const Muvie = () => {
             <div className="relative mb-8 rounded-lg overflow-hidden bg-orange-300">
               <img src={movie.Poster} alt="poster" />
               <div className="absolute right-0 bottom-0 text-white">
-                {isFavorites ? (
-                  <button
-                    onClick={() => checkPresence(favorites, movie.imdbID)}
-                    className=" py-1 px-2 text-center hover:bg-sky-700 duration-500 rounded-tl-lg bg-sky-800"
-                  >
-                    <TurnedInIcon />
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => checkPresence(favorites, movie.imdbID)}
-                    className=" bg-gray-700 py-1 px-2 text-center hover:bg-gray-600 duration-500 rounded-tl-lg "
-                  >
-                    <TurnedInIcon />
-                  </button>
-                )}
+                <button
+                  onClick={() => checkPresence(favorites, movie.imdbID)}
+                  className={
+                    isFavorites
+                      ? " py-1 px-2 text-center hover:bg-sky-700 duration-500 rounded-tl-lg bg-sky-800"
+                      : " bg-gray-700 py-1 px-2 text-center hover:bg-gray-600 duration-500 rounded-tl-lg "
+                  }
+                >
+                  <TurnedInIcon />
+                </button>
               </div>
             </div>
           </div>

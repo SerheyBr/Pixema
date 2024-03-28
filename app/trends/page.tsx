@@ -1,18 +1,11 @@
 "use client";
 import Card from "@/components/Card";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { setPage, fetchTrends } from "@/redux/trendsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { IMovie } from "@/types/types";
 import { CircularProgress, Pagination } from "@mui/material";
-
-// const getFilms = async () => {
-//   const response = await fetch(
-//     `https://www.omdbapi.com/?i=tt3896198&apikey=9baeb1f7&s=Potter`
-//   );
-//   return response;
-// };
 
 const Trends = () => {
   const dispatch = useDispatch<AppDispatch>();

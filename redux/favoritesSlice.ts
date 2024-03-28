@@ -1,18 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react-dom/test-utils";
 
 const localStorageFavorites = JSON.parse(localStorage.getItem("favorites"));
 
 interface IInitialState {
   favorites: any[];
 }
-
-// if(localStorage.length){
-
-// }
-// const initialState: IInitialState = {
-//   favorites: [],
-// };
 
 const initialState: IInitialState = localStorageFavorites.length
   ? { favorites: localStorageFavorites }
