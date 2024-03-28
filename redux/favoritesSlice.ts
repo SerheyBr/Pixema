@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const localStorageFavorites = JSON.parse(localStorage.getItem("favorites"));
+const localStorageFavorites: any = JSON.parse(
+  localStorage.getItem("favorites")
+);
 
 interface IInitialState {
   favorites: any[];
